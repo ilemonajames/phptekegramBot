@@ -13,7 +13,22 @@
 |
 */
 
+use App\Http\Controllers\Api\V1\ChatbotController;
+
+
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
-$router->get('/users', 'UserController@index');
+// $router->get('/users', 'UserController@index');
+
+// subscribe user to chatbot
+Route::post('/v1/subscribe-chatbot', 'Api\V1\ChatbotController@subscribeToChatbot');
+
+// subscribe user to channel
+Route::post('/v1/subscribe-channel', 'Api\V1\ChatbotController@subscribeToChannel');
+
+// send message to subscribers
+Route::post('/v1/send-message', 'Api\V1\ChatbotController@sendMessage');
+
+// webhook to receive responses from messenger API
+Route::post('/v1/webhook', 'Api\V1\ChatbotController@webhook');
